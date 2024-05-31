@@ -11,10 +11,22 @@ route.get('/',async (req,res)=>{
 })
 
 //GET a single workout
-// route.get('/:id',(req,res)=>{
-//     const id = req.params;
+route.get('/:id',async (req,res)=>{
+    const id = req.params.id;
+    try{
+        const data = await workoutSchema.findById(id);
+        if(!data){
+            res.status(400).send({msg:"No such workout with this Id"});
+            
+        }
+        res.status(200).send(data);
+
+
+    }catch(error){
+        res.status(400).send({msg:error.message});
+    }
     
-// })
+})
 
 //POST a workout
 route.post('/',async (req,res)=>{
