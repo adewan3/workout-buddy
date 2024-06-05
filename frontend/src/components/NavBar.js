@@ -11,7 +11,7 @@ const NavBar = ()=>{
                 <Link to="/">
 
                 <h1>Workout Buddy</h1>
-                <img src={workoutImg}/>
+                <img src={workoutImg} alt='workoutImage'/>
 
                 </Link>
                 

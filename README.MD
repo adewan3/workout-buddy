@@ -18,6 +18,8 @@ Model --> The schema is present in Models folder which makes use of mongoose ORM
 
 Express --> This application makes use of Express framework for creating the REST API and communicating the backend and front end in JSON
 
+CORS --> Is solved using proxy in the package.json file in the frontend folder
+
 ## Installation
 
 ```bash
