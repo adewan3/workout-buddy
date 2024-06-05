@@ -1,28 +1,48 @@
 import { useEffect, useState } from "react";
+import WorkoutComponent from "../components/WorkoutComponent";
 
 const Home = ()=>{
 
-    // const [data, setData] = useState([]);
+    const [data, setData] = useState(null);
+    const fetchAllData = async()=>{
 
-    // const fetchAllWorkouts = async ()=>{
-    //     try{
+        try{
             
+            const response = await fetch("/api/workouts");
+            const allData = await response.json();
+            console.log(allData);
 
-    //     }catch(error){
-    //         console.log('Error in fetching data');
-    //     }
+            if(response.ok){
+                setData(allData);
+            }
 
+        }catch(error){
+            console.log('Error while fetching data');
+        }
 
-    // }
+    }
 
-    // useEffect(()=>{
+    useEffect(()=>{
 
-
-
-    // },[]);
+        fetchAllData();
+        
+    },[]);
 
     return(
-        <h1>Home Page</h1>
+        <div className="home">
+
+            {
+                data && data.map((workout)=>(
+                    <WorkoutComponent workout={workout}/>
+                ))
+            }
+
+            
+
+           
+
+        </div>
+        
     );
 }
 
