@@ -39,3 +39,51 @@ code {
   padding: 20px;
   margin: 0 auto;
 }
+
+.workouts {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px;
+  position: relative;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.workouts h3{
+  color: #3d943d;
+}
+
+.workouts-description {
+  padding-right: 100px; /* To ensure the buttons do not overlap with the text */
+}
+
+.workouts-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Space between buttons */
+}
+
+.workouts-button button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.workouts-button img {
+  width: 16px;
+  height: 16px;
+}
+
+.workouts-button button:hover.delete {
+  background-color: red;
+}
+
+.workouts-button button:hover.edit {
+  background-color: yellow;
+}
