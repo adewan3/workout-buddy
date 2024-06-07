@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import WorkoutComponent from "../components/WorkoutComponent";
+import FormComponent from '../components/FormComponent';
+
 
 const Home = ()=>{
 
@@ -31,11 +33,20 @@ const Home = ()=>{
     return(
         <div className="home">
 
+            <div className="workouts-container">
+
             {
                 data && data.map((workout)=>(
                     <WorkoutComponent workout={workout}/>
                 ))
             }
+
+
+            </div>
+
+            
+
+            <FormComponent/>
 
             
 
