@@ -20,6 +20,19 @@ Express --> This application makes use of Express framework for creating the RES
 
 CORS --> Is solved using proxy in the package.json file in the frontend folder
 
+Context API --> State management solution for react
+
+useContext --> is the hook used for statemanagment in this project
+
+useReducer --> a hook used for statemanagement
+
+To manage global state I have made use of useContext + useReducer here
+
+Step 1. create a reducer function with state, action
+Step 2. const [state, dispatch] = useReducer(reducer, initialstate);
+Step 3. Need to make global state where both state and dispacth can be utilized from child components
+Step 4.
+
 ## Installation
 
 ```bash

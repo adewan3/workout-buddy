@@ -7,6 +7,7 @@ const FormComponent = () => {
         reps: "",
         load: 0
     });
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,13 +30,17 @@ const FormComponent = () => {
                 body: JSON.stringify(formData)
             });
 
+            
+
             if (response.ok) {
                 setFormData({
                     title: "",
                     reps: "",
                     load: 0
                 });
+                
             } else {
+                
                 console.log('Failed to add workout');
             }
         } catch (error) {
@@ -53,6 +58,7 @@ const FormComponent = () => {
             <label>Load in Kg</label>
             <input type="number" name="load" value={formData.load} onChange={handleChange} required />
             <button type="submit">Add a Workout</button>
+            
         </form>
     );
 }
