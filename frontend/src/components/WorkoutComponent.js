@@ -2,8 +2,8 @@ import deleteImg from '../img/trash.svg';
 import editImg from '../img/edit.svg';
 import starImg from '../img/star-regular.svg';
 import '../index.css';
-import { useContext, useState } from 'react';
-import { workoutContext } from '../context/WorkoutContext';
+import {useState } from 'react';
+
 import { useWorkoutContext } from '../hooks/useWorkoutContext';
 
 const WorkoutComponent = (props)=>{
@@ -43,6 +43,11 @@ const WorkoutComponent = (props)=>{
         
 
     }
+
+    const handleEdit = ()=>{
+        dispatch({ type: "SET_EDIT_WORKOUT", payload: props.workout });
+
+    }
     return(
         <div className="workouts">
             <div className="workouts-description" key={_id}>
@@ -58,7 +63,7 @@ const WorkoutComponent = (props)=>{
                 <img src={deleteImg} alt='deleteImage'/>
                </button>
 
-               <button className='edit'>
+               <button className='edit' onClick={handleEdit}>
                 <img src={editImg} alt='editImage'/>
                </button>
 

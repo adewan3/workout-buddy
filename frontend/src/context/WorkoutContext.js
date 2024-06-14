@@ -31,7 +31,14 @@ const WorkoutReducer = (state, action)=>{
             
 
         case "EDIT":
-            break;
+            return { ...state, workouts: state.workouts.map(w => w._id === action.payload._id ? action.payload : w) };
+            
+        
+        case "SET_EDIT_WORKOUT":
+            return { ...state, editWorkout: action.payload };
+        
+        case "CLEAR_EDIT_WORKOUT":
+            return {...state,editWorkout:null};
         
         default:
             return state;
@@ -45,7 +52,8 @@ const WorkoutReducer = (state, action)=>{
 const WorkoutContext = ({children})=>{
 
     const [state, dispatch] = useReducer(WorkoutReducer,{
-        workouts:null
+        workouts:null,
+        editWorkout: null
     });
 
     return(
