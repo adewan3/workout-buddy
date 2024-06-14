@@ -1,14 +1,24 @@
 import '../index.css';
-import {useState } from 'react';
+import {useEffect, useState } from 'react';
 import {useWorkoutContext} from '../hooks/useWorkoutContext';
 
 const FormComponent = () => {
-    const {workouts, dispatch} = useWorkoutContext();
+    const {editWorkout, dispatch} = useWorkoutContext();
     const [formData, setFormData] = useState({
         title: "",
         reps: "",
         load: 0
     });
+
+    useEffect(()=>{
+        if(editWorkout){
+
+            setFormData(editWorkout);
+
+        }
+        
+
+    },[editWorkout])
     
 
     const handleChange = (e) => {
@@ -51,19 +61,58 @@ const FormComponent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
-        try{
-            handleAdd(formData);
-            dispatch({type:"ADD", payload:formData});
-            setFormData({
-                title: "",
-                reps: "",
-                load: 0
-            });
 
-        }catch(error){
-            console.log("error while submitting data");
+        if(editWorkout){
+            //create a put request
+            try{
+                const response = await fetch(`/api/workouts/${editWorkout._id}`,{
+                    method:"PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
 
-        }
+                });
+
+                if (response.ok) {
+                    console.log("Data Updated Successfully");
+                    const data = await response.json();
+                    dispatch({ type: "EDIT", payload: data });
+                    dispatch({type:"CLEAR_EDIT_WORKOUT"})
+                    setFormData({
+                        title: "",
+                        reps: "",
+                        load: 0
+                    });
+                } else {
+                    console.log('Failed to update workout');
+                }
+
+            }catch(error){
+                console.log("Error",error);
+
+            }
+
+        }//if
+        else{
+
+            try{
+                handleAdd(formData);
+                dispatch({type:"ADD", payload:formData});
+                setFormData({
+                    title: "",
+                    reps: "",
+                    load: 0
+                });
+    
+            }catch(error){
+                console.log("error while submitting data");
+    
+            }
+            
+
+        }//else
+
         
                 
             
@@ -79,7 +128,7 @@ const FormComponent = () => {
             <input type="text" name="reps" value={formData.reps} onChange={handleChange} required />
             <label>Load in Kg</label>
             <input type="number" name="load" value={formData.load} onChange={handleChange} required />
-            <button type="submit">Add a Workout</button>
+            <button type="submit">{editWorkout?"UPDATE WORKOUT":"ADD WORKOUT"}</button>
             
         </form>
     );
