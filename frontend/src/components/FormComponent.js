@@ -1,7 +1,9 @@
 import '../index.css';
-import { useState } from 'react';
+import {useState } from 'react';
+import {useWorkoutContext} from '../hooks/useWorkoutContext';
 
 const FormComponent = () => {
+    const {workouts, dispatch} = useWorkoutContext();
     const [formData, setFormData] = useState({
         title: "",
         reps: "",
@@ -17,9 +19,9 @@ const FormComponent = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(formData);
+    const handleAdd = async (newData)=>{
+
+
         try {
             // Make a Post call to /api/workouts
             const response = await fetch("/api/workouts", {
@@ -27,17 +29,13 @@ const FormComponent = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(newData)
             });
 
             
 
             if (response.ok) {
-                setFormData({
-                    title: "",
-                    reps: "",
-                    load: 0
-                });
+                console.log("Data Added Successfully");
                 
             } else {
                 
@@ -46,6 +44,30 @@ const FormComponent = () => {
         } catch (error) {
             console.log('Error while making a post request', error);
         }
+
+
+    }//handelAdd
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(formData);
+        try{
+            handleAdd(formData);
+            dispatch({type:"ADD", payload:formData});
+            setFormData({
+                title: "",
+                reps: "",
+                load: 0
+            });
+
+        }catch(error){
+            console.log("error while submitting data");
+
+        }
+        
+                
+            
+       
     };
 
     return (
