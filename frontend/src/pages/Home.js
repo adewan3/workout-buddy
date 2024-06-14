@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import WorkoutComponent from "../components/WorkoutComponent";
 import FormComponent from '../components/FormComponent';
+// import { workoutContext } from "../context/WorkoutContext";
+import {useWorkoutContext} from '../hooks/useWorkoutContext';
 
 
 const Home = ()=>{
-
-    const [data, setData] = useState(null);
+    const {workouts, dispatch} = useWorkoutContext();
+    //const [data, setData] = useState(null);
     const fetchAllData = async()=>{
 
         try{
@@ -15,7 +17,8 @@ const Home = ()=>{
             console.log(allData);
 
             if(response.ok){
-                setData(allData);
+                //setData(allData);
+                dispatch({type:"INIT", payload: allData});
             }
 
         }catch(error){
@@ -36,8 +39,8 @@ const Home = ()=>{
             <div className="workouts-container">
 
             {
-                data && data.map((workout)=>(
-                    <WorkoutComponent workout={workout}/>
+                workouts && workouts.map((workout, index)=>(
+                    <WorkoutComponent workout={workout} key={index}/>
                 ))
             }
 
