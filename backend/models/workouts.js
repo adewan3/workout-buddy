@@ -23,3 +23,4 @@ const workoutsSchema = new Schema({
 },{timeStamp:true});
 
 module.exports = mongoose.model('workout',workoutsSchema);
+//module.exports = mongoose.model.workout || mongoose.model('workout', workoutsSchema);
