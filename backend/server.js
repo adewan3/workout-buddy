@@ -7,6 +7,14 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
+//middleware
+app.use(express.json());
+//routes
+//workouts
+app.use('/api/workouts',workoutRoutes);
+
+app.use('/api/user',userRoutes);
+
 mongoose.connect(process.env.MONGOOSE_URI)
 .then(()=>{
     console.log('DB connection is made');
@@ -19,12 +27,7 @@ mongoose.connect(process.env.MONGOOSE_URI)
 })
 
 
-//middleware
-app.use(express.json());
-//routes
-//workouts
-app.use('/api/workouts',workoutRoutes);
-app.use('/api/user',userRoutes);
+
 
 
 
