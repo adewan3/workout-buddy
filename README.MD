@@ -35,6 +35,8 @@ Step 3. Need to make global state where both state and dispacth can be utilized 
 bcrypt --> is the hashing technique used for signup
 bcrypt is a two step process --> STEP 1. add salt to password , STEP 2. Add hash to the password+salt
 
+Made use of validator library for checking email and password
+
 ## Installation
 
 ```bash
