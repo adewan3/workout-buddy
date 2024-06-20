@@ -45,4 +45,26 @@ userSchema.statics.signup = async function(email, password){
     return user;
 }
 
+userSchema.statics.login = async function(email, password){
+
+    console.log(email, password);
+
+    if(!email || !password){
+        throw new Error("Fields are empty");
+    }
+
+
+    const user = await this.findOne({email});
+    console.log(user);
+    if(!user){
+       throw new Error("User not exist" );
+    }
+    // if user is present
+    const match = await bcrypt.compare(password, user.password);
+    if(!match){
+        throw new Error("Incorrect password!");
+    }
+    return user;
+}
+
 module.exports =  mongoose.model('user',userSchema);
