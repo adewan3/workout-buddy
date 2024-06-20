@@ -25,6 +25,9 @@ bcrypt is a two step process --> STEP 1. add salt to password , STEP 2. Add hash
 
 Made use of validator library for checking email and password in the user.js model
 
+For authentication of the user I am using JWT
+JWT consist of 3 parts Header, payload , signature
+
 ## FrontEnd
 
 CORS --> Is solved using proxy in the package.json file in the frontend folder
